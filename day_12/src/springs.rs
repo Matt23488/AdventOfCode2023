@@ -9,6 +9,8 @@ struct Row {
     springs: String,
 }
 
+type MemoKey<'a> = (&'a str, &'a [usize], usize);
+
 impl HotSprings {
     pub fn create(input: &str) -> Self {
         let rows = input.lines()
@@ -65,7 +67,7 @@ impl Row {
         self.arrangements_recursive(&self.springs, &self.counts[..], 0, &mut memo)
     }
 
-    fn arrangements_recursive<'a>(&self, springs: &'a str, counts: &'a [usize], current_group_size: usize, memo: &mut HashMap<(&'a str, &'a [usize], usize), u64>) -> u64 {
+    fn arrangements_recursive<'a>(&self, springs: &'a str, counts: &'a [usize], current_group_size: usize, memo: &mut HashMap<MemoKey<'a>, u64>) -> u64 {
         if let Some(&result) = memo.get(&(springs, counts, current_group_size)) {
             return result;
         }
