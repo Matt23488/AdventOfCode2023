@@ -30,7 +30,7 @@ impl HotSprings {
     pub fn unfold(&mut self) {
         self.0
             .iter_mut()
-            .for_each(|row| row.unfold());
+            .for_each(Row::unfold);
     }
 }
 
